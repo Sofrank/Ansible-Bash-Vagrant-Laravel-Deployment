@@ -1,0 +1,27 @@
+---
+- name: Provision Slave
+  hosts: all
+  tasks:
+    - name: Copying Script into Remote Server
+      copy:
+        src: /home/vagrant/Laravel/laravel.sh
+        dest: /home/vagrant/laravel.sh
+        mode: 0755
+
+    - name: Executing Script on Remote Server
+      command: /home/vagrant/laravel.sh
+
+    - name: Verifying Laravel Application's Accessibility Using Remote Server's IP Address
+      uri:
+        url: http://192.168.56.56
+        return_content: yes
+        status_code: 200
+        validate_certs: yes
+      register: response
+
+    - name: Cron Job for Recording Remote Server's Uptime Daily and Set to 12am
+      cron:
+        name: Uptime
+        minute: "0"
+        hour: "0"
+        job: "uptime >> /var/log/uptime.log"
