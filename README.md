@@ -1,6 +1,6 @@
 # Cloud Engineering Second Semester Examination Project
 
-(Deploy Laravel and Set up Postgresql)
+(Deploy LAMP Stack))
 
 ## Documented the Steps with screenshots as seen below:
 
